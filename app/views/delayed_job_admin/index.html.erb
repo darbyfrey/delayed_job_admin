@@ -1,10 +1,11 @@
-<p>Delayed::Job.count: <%= Delayed::Job.count %></p>
+<p>Delayed::Job.count: <%= @count %></p>
 
 <table id="jobs">
   <thead>
     <tr>
       <th>id</th>
       <th>priority</th>
+      <th>queue</th>
       <th>attempts</th>
       <th>handler</th>
       <th>last_error</th>
@@ -17,10 +18,11 @@
     </tr>
   </thead>
   <tbody>
-    <% Delayed::Job.all.reverse.each do |job| %>
+    <% @jobs.each do |job| %>
       <tr class="job" id="job-<%= job.id %>">
         <td><%= job.id %></td>
         <td><%= job.priority %></td>
+        <td><%= job.queue %></td>
         <td><%= job.attempts %></td>
         <td><%= truncate(job.handler || '-', :length => 40).gsub('--- !', '') %></td>
         <td><%= truncate(job.last_error || '-', :length => 40) %></td>
